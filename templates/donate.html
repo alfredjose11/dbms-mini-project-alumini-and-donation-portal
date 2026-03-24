@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Donation | AJCE Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AJCE Alumni Connect</h1>
+            <nav>
+                <a href="/">Directory</a>
+                <a href="/donate" class="active">Make a Donation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="form-card">
+            <h2>Support Your Alma Mater</h2>
+            <p>Your contributions help fund scholarships and infrastructure.</p>
+            
+            <form action="/donate" method="POST">
+                <div class="form-group">
+                    <label for="alumni_id">Select Your Name</label>
+                    <select name="alumni_id" id="alumni_id" required>
+                        <option value="" disabled selected>Choose from list...</option>
+                        {% for person in alumni %}
+                        <option value="{{ person.id }}">{{ person.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Donation Amount (INR)</label>
+                    <input type="number" name="amount" id="amount" placeholder="e.g. 5000" required min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">Purpose of Donation</label>
+                    <select name="purpose" id="purpose" required>
+                        <option value="Scholarship">Scholarship Fund</option>
+                        <option value="Infrastructure">Infrastructure Development</option>
+                        <option value="Department Event">Department Event</option>
+                        <option value="General">General Contribution</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Donation</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Directory | AJCE Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AJCE Alumni Connect</h1>
+            <nav>
+                <a href="/" class="active">Directory</a>
+                <a href="/donate">Make a Donation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Alumni Network</h2>
+            <p>Connect with fellow graduates from Amal Jyothi College.</p>
+        </section>
+
+        <div class="content-card">
+            <h3>Join the Network</h3>
+            <form action="/add_alumni" method="POST" class="inline-form">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="number" name="batch_year" placeholder="Batch (e.g. 2025)" required>
+                <input type="text" name="dept" placeholder="Department (e.g. CSE)" required>
+                <input type="text" name="company" placeholder="Current Company" required>
+                <button type="submit" class="btn-submit" style="margin-top: 10px;">Register Details</button>
+            </form>
+        </div>
+
+        <div class="content-card">
+            <h3>Directory</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Batch</th>
+                        <th>Department</th>
+                        <th>Current Company</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person in alumni %}
+                    <tr>
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.batch_year }}</td>
+                        <td>{{ person.dept }}</td>
+                        <td>{{ person.company }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
